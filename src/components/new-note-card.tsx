@@ -3,7 +3,11 @@ import { X } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "sonner";
 
-export function NewNoteCard() {
+interface NewNoteCardProps{
+  oneNoteCreated: (content: string) => void
+}
+
+export function NewNoteCard({ oneNoteCreated }: NewNoteCardProps) {
     const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true);
     const [content, setContent] = useState('');
 
@@ -22,7 +26,7 @@ export function NewNoteCard() {
     function handleSaveNote(event: FormEvent) {
       event.preventDefault();
 
-      console.log(content)
+      oneNoteCreated(content);
 
       toast.success("Nota criada com sucesso !");
     }
